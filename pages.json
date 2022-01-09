@@ -1,0 +1,22 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "671的开源插件"
+			}
+		},
+    {
+    	"path": "pages/eg-lucky/index",
+    	"style": {
+    		"navigationBarTitleText": "大转盘"
+    	}
+    }
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
