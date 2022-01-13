@@ -5,10 +5,10 @@
 在页面中使用
 ```
 <i671-filter
-	@result="filterResult"
-	:headerTextList="headerTextList"
-	:checkboxList="checkboxList"
-	:radioList="radioList"></i671-filter>
+  @result="filterResult"
+  :headerTextList="headerTextList"
+  :checkboxList="checkboxList"
+  :radioList="radioList"></i671-filter>
 ```
 
 # 参数
