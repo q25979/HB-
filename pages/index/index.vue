@@ -3,6 +3,9 @@
     <navigator url="/pages/eg-lucky/index" hover-class="navigator-hover">
       <button type="default">大转盘</button>
     </navigator>
+    <navigator url="/pages/eg-filter/index" hover-class="navigator-hover">
+      <button type="default">筛选</button>
+    </navigator>
 	</view>
 </template>
 
@@ -10,7 +13,6 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
 			}
 		},
 		onLoad() {

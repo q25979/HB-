@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "筛选",
+  "usingComponents": {
+    "i671-filter": "/components/i671-filter/i671-filter"
+  }
+}

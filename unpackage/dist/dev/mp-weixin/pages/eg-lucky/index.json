@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "大转盘",
+  "usingComponents": {
+    "i671-lucky": "/components/i671-lucky/i671-lucky"
+  }
+}

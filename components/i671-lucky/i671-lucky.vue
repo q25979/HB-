@@ -2,12 +2,19 @@
   <view class="_671-lucky">
     <view class="outer-ring">
       <view class="outer-dot-container">
+        <!-- #ifdef APP-PLUS || APP-PLUS-NVUE || H5 || MP-QQ -->
         <canvas canvas-id="luckyDot"></canvas>
+        <!-- #endif -->
+        <!-- #ifdef MP-WEIXIN -->
+        <canvas type="2d" id="luckyDot"></canvas>
+        <!-- #endif -->
       </view>
       <view
         :style="'transform: rotate(' + deg + 'deg)'"
         class="inner-ring">
+        <!-- #ifdef APP-PLUS || APP-PLUS-NVUE || H5 -->
         <canvas canvas-id="innerPrizeCanvas"></canvas>
+        <!-- #endif -->
       </view>
       <view class="start-button-box">
         <view class="triangle"></view>
@@ -65,9 +72,15 @@
     mounted () {
       const systemInfo = uni.getSystemInfoSync()
       this.screenW = systemInfo.windowWidth
-
+      
+      // #ifdef APP-PLUS || APP-PLUS-NVUE || H5 || MP-QQ
       this.handleDrawCircle()
       this.handleInnerRing()
+      // #endif
+      
+      // #ifdef MP-WEIXIN
+      this.handleMpDrawCirecle()
+      // #endif
     },
     destroyed () {
       clearInterval(this.dotTimer)
@@ -116,19 +129,119 @@
         let angle = 0
         for (let i = 0; i < 6; i++) {
           if (index === i) {
-            return -angle - ( i * 60 )
+            angle = angle + ((i + 2) * 60)
+            return -(angle % 360)
           }
         }
       },
 
-      // 内圈&产品
+      // 外圈-画圆 小程序
+      handleMpDrawCirecle () {
+        const query = uni.createSelectorQuery().in(this)
+        
+        query.select('#luckyDot')
+          .fields({ node: true, size: true })
+          .exec((res) => {
+            const canvas = res[0].node
+            this.ctx = canvas.getContext('2d')
+            this.handleMpDrawDot()
+          })
+      },
+      
+      // 外圈-画点- APP + H5
+      handleMpDrawDot () {
+        this.dotCount++
+      
+        let color1 = '#FFFFFF'
+        let color2 = '#efef00'
+        if (this.dotCount % 2 !== 0) {
+          color1 = '#efef00'
+          color2 = '#FFFFFF'
+        }
+      
+        let center = this.rpxToPx(this.circleSize / 2)  // 中心点
+        let dotSize = this.rpxToPx(15)
+        let c = 2 * Math.PI * center // 周长
+        let interval = c / 20 // 间隔
+      
+        // 坐标
+        let coor = [
+          // LEFT
+          {
+            x: this.rpxToPx(30),
+            y: center
+          }, {
+            x: this.rpxToPx(50),
+            y: center - interval
+          }, {
+            x: this.rpxToPx(110),
+            y: center - interval * 1.97
+          }, {
+            x: this.rpxToPx(210),
+            y: center - interval * 2.64
+          },
+          // TOP
+          {
+            x: center,
+            y: this.rpxToPx(30)
+          }, {
+            x: center * 2 - this.rpxToPx(210),
+            y: center - interval * 2.64
+          }, {
+            x: center * 2 - this.rpxToPx(110),
+            y: center - interval * 1.97
+          }, {
+            x: center * 2 - this.rpxToPx(50),
+            y: center - interval
+          },
+          // RIGHT
+          {
+            x: this.rpxToPx(this.circleSize - 30),
+            y: center
+          }, {
+            x: center * 2 - this.rpxToPx(50),
+            y: center + interval
+          }, {
+            x: center * 2 - this.rpxToPx(110),
+            y: center + interval * 1.97
+          }, {
+            x: center * 2 - this.rpxToPx(210),
+            y: center + interval * 2.64
+          },
+          // BOTTOM
+          {
+            x: center,
+            y: this.rpxToPx(this.circleSize - 30)
+          }, {
+            x: this.rpxToPx(210),
+            y: center + interval * 2.64
+          }, {
+            x: this.rpxToPx(110),
+            y: center + interval * 1.97
+          }, {
+            x: this.rpxToPx(50),
+            y: center + interval
+          }
+        ]
+        for (let i = 0; i < 16; i++) {
+          // left
+          this.ctx.beginPath()
+          this.ctx.arc(coor[i].x, coor[i].y, dotSize, 0, 2 * Math.PI)
+          this.ctx.fillStyle = i % 2 ? color1 : color2
+          this.ctx.closePath()
+          this.ctx.fill()
+        }
+        // this.ctx.draw()
+      },
+
+      // 内圈&产品 APP + H5
       handleInnerRing () {
         let center = this.rpxToPx(this.innerCircleSize / 2)  // 中心点
         let imgSize = this.rpxToPx(100)
         let pi = Math.PI
         let defaultPaht = ''
         this.innerCtx = uni.createCanvasContext('innerPrizeCanvas')
-
+        
         let start = 0, end = 1/3, interval = 1/3
         for (let i = 0; i < 6; i++) {
           if (i % 2 === 0) {
@@ -212,7 +325,7 @@
         this.innerCtx.draw()
       },
 
-      // 外圈-画圆
+      // 外圈-画圆 APP + H5
       handleDrawCircle () {
         this.ctx = uni.createCanvasContext('luckyDot')
 
@@ -223,7 +336,7 @@
         }, this.dotSpeed * 1000)
       },
 
-      // 外圈-画点
+      // 外圈-画点- APP + H5
       handleDrawDot () {
         this.dotCount++
 

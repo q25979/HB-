@@ -11,6 +11,12 @@
     	"style": {
     		"navigationBarTitleText": "大转盘"
     	}
+    },
+    {
+    	"path": "pages/eg-filter/index",
+    	"style": {
+    		"navigationBarTitleText": "筛选"
+    	}
     }
 	],
 	"globalStyle": {

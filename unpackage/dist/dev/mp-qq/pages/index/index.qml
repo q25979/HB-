@@ -1,0 +1,1 @@
+<view class="home"><navigator url="/pages/eg-lucky/index" hover-class="navigator-hover"><button type="default">大转盘</button></navigator></view>

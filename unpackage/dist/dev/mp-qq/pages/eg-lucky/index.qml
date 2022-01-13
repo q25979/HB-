@@ -1,0 +1,1 @@
+<view class="lucky"><i671-lucky class="vue-ref" vue-id="7840c343-1" startText="开始" wIndex="{{wIndex}}" luckyList="{{list}}" data-ref="lucky" data-event-opts="{{[['^onReadyStart',[['onReadyStart']]],['^lotteryData',[['getLotterData']]]]}}" bind:onReadyStart="__e" bind:lotteryData="__e" bind:__l="__l"></i671-lucky></view>

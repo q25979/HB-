@@ -1,0 +1,1 @@
+<view class="eg-filter data-v-40f8c45d"><i671-filter vue-id="43bf6f6e-1" headerTextList="{{headerTextList}}" checkboxList="{{checkboxList}}" radioList="{{radioList}}" data-event-opts="{{[['^result',[['filterResult']]]]}}" bind:result="__e" class="data-v-40f8c45d" bind:__l="__l"></i671-filter><view class="eg-filter-list data-v-40f8c45d"></view></view>
