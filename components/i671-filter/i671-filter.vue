@@ -247,7 +247,7 @@
   .i671-filter {
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 750rpx;
     .i671-bottom-1px {
       position: relative;
       &::after {
@@ -302,6 +302,9 @@
     .i671-filter-mask {
       position: fixed;
       top: 100rpx;
+      // #ifdef H5
+      top: 200rpx;
+      // #endif
       width: 100%;
       z-index: 999;
       height: 0;

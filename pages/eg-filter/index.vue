@@ -72,7 +72,7 @@
 <style lang="scss" scoped>
   .eg-filter {
     .eg-filter-list {
-      margin-top: 100rpx;
+      padding-top: 100rpx;
     }
   }
 </style>
